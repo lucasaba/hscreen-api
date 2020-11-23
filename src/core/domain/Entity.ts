@@ -12,6 +12,10 @@ const isEntity = (v: any): v is Entity<any> => {
       this._id = id ? id : new UniqueEntityID();
       this.properties = properties;
     }
+
+    get uuid() {
+      return this._id.toValue();
+    }
   
     public equals (object?: Entity<T>) : boolean {
   

@@ -8,7 +8,7 @@ describe('Time Schedule', () => {
     });
 
     expect(schedule.isFailure).toBeTruthy();
-    expect(schedule.error).toEqual('Time schedule cannot start after its end');
+    expect(schedule.errorMessages).toContain('Time schedule cannot start after its end');
   });
 
   it('should be in the same day', () => {
@@ -20,7 +20,7 @@ describe('Time Schedule', () => {
     });
 
     expect(schedule.isFailure).toBeTruthy();
-    expect(schedule.error).toEqual('Time schedule should end in the same day of its start');
+    expect(schedule.errorMessages).toContain('Time schedule should end in the same day of its start');
   });
 
   it('should be at least 15 minutes long', () => {
@@ -30,7 +30,7 @@ describe('Time Schedule', () => {
     });
 
     expect(schedule.isFailure).toBeTruthy();
-    expect(schedule.error).toEqual('Time schedule should last, at least, 15 minutes');
+    expect(schedule.errorMessages).toContain('Time schedule should last, at least, 15 minutes');
   });
 
   it('should be valid if all rules are observed', () => {

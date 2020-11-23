@@ -20,21 +20,39 @@ export class TimeSchedule extends ValueObject<TimeScheduleProperties> {
 
   public static create(properties: TimeScheduleProperties): Result<TimeSchedule> {
     const propertiesClass = plainToClass(TimeScheduleProperties, properties);
-    const result = validateSync(propertiesClass);
-    if (result.length > 0) {
-      return Result.fail<TimeSchedule>(result);
+    const results = validateSync(propertiesClass);
+    if (results.length > 0) {
+      return Result.fail<TimeSchedule>(results);
     }
 
     if (properties.startDate > properties.endDate) {
-      return Result.fail<TimeSchedule>('Time schedule cannot start after its end');
+      return Result.fail<TimeSchedule>([
+        {
+          constraints: {
+            invalid: 'Time schedule cannot start after its end',
+          },
+        },
+      ]);
     }
 
     if (!this.datesAreOnTheSameDay(properties.startDate, properties.endDate)) {
-      return Result.fail<TimeSchedule>('Time schedule should end in the same day of its start');
+      return Result.fail<TimeSchedule>([
+        {
+          constraints: {
+            invalid: 'Time schedule should end in the same day of its start',
+          },
+        },
+      ]);
     }
 
     if ((properties.endDate.getTime() - properties.startDate.getTime()) / 1000 < 15 * 60) {
-      return Result.fail<TimeSchedule>('Time schedule should last, at least, 15 minutes');
+      return Result.fail<TimeSchedule>([
+        {
+          constraints: {
+            invalid: 'Time schedule should last, at least, 15 minutes',
+          },
+        },
+      ]);
     }
 
     return Result.ok<TimeSchedule>(new TimeSchedule(properties));

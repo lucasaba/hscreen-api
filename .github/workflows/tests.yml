@@ -1,4 +1,4 @@
-name: HS-API-Tests
+name: Unit tests
 
 on: push
 

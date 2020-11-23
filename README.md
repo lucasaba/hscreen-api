@@ -1,7 +1,8 @@
 # Hospital Screen API
 
 I love badges!
-![Unit tests](https://github.com/lucasaba/hscreen-api/workflows/HS-API-Tests/badge.svg)
+
+![Unit tests](https://github.com/lucasaba/hscreen-api/workflows/Unit%20tests/badge.svg)
 
 ## Description
 

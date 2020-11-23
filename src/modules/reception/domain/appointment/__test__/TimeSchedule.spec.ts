@@ -1,5 +1,3 @@
-import { Appointment } from "../Appointment";
-import { Patient } from "../Patient";
 import { TimeSchedule } from "../TimeSchedule";
 
 describe('Time Schedule', () => {
@@ -40,7 +38,6 @@ describe('Time Schedule', () => {
             startDate: new Date(),
             endDate: new Date(Date.now() + 16*60000),
         })
-        // console.log(schedule.error);
 
         expect(schedule.isSuccess).toBeTruthy();
         expect(schedule.getValue() instanceof TimeSchedule).toBeTruthy();

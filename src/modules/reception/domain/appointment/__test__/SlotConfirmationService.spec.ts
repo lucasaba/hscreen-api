@@ -10,13 +10,11 @@ describe('Slot Confirmation Service', () => {
   const patient = Patient.create({
     familyName: 'Smith',
     name: 'John',
-    mobileNumber: '555-5467897',
+    mobilePhone: '555-5467897',
   }).getValue();
 
   beforeEach(async () => {
-    slotConfirmationService = new SlotConfirmationService(
-      new InMemoryAppointmentRepository(),
-    );
+    slotConfirmationService = new SlotConfirmationService(new InMemoryAppointmentRepository());
     // Add an appointment of 15 minutes in 15 minutes from now
     const appointmentOne = Appointment.create({
       patient: patient,
@@ -47,9 +45,9 @@ describe('Slot Confirmation Service', () => {
       }).getValue(),
     }).getValue();
 
-    await expect(
-      slotConfirmationService.confirmAppointment(appointmentInThePast),
-    ).rejects.toThrowError(InvalidAppointmentException);
+    await expect(slotConfirmationService.confirmAppointment(appointmentInThePast)).rejects.toThrowError(
+      InvalidAppointmentException,
+    );
   });
 
   it('block appointment if overlaps other appointments', async () => {
@@ -60,9 +58,9 @@ describe('Slot Confirmation Service', () => {
         endDate: new Date(Date.now() + 25 * 60000),
       }).getValue(),
     }).getValue();
-    await expect(
-      slotConfirmationService.confirmAppointment(appointmentTest),
-    ).rejects.toThrowError(InvalidAppointmentException);
+    await expect(slotConfirmationService.confirmAppointment(appointmentTest)).rejects.toThrowError(
+      InvalidAppointmentException,
+    );
 
     appointmentTest = Appointment.create({
       patient: patient,
@@ -71,9 +69,9 @@ describe('Slot Confirmation Service', () => {
         endDate: new Date(Date.now() + 33 * 60000),
       }).getValue(),
     }).getValue();
-    await expect(
-      slotConfirmationService.confirmAppointment(appointmentTest),
-    ).rejects.toThrowError(InvalidAppointmentException);
+    await expect(slotConfirmationService.confirmAppointment(appointmentTest)).rejects.toThrowError(
+      InvalidAppointmentException,
+    );
 
     appointmentTest = Appointment.create({
       patient: patient,
@@ -82,9 +80,9 @@ describe('Slot Confirmation Service', () => {
         endDate: new Date(Date.now() + 46 * 60000),
       }).getValue(),
     }).getValue();
-    await expect(
-      slotConfirmationService.confirmAppointment(appointmentTest),
-    ).rejects.toThrowError(InvalidAppointmentException);
+    await expect(slotConfirmationService.confirmAppointment(appointmentTest)).rejects.toThrowError(
+      InvalidAppointmentException,
+    );
 
     appointmentTest = Appointment.create({
       patient: patient,
@@ -93,9 +91,9 @@ describe('Slot Confirmation Service', () => {
         endDate: new Date(Date.now() + 65 * 60000),
       }).getValue(),
     }).getValue();
-    await expect(
-      slotConfirmationService.confirmAppointment(appointmentTest),
-    ).rejects.toThrowError(InvalidAppointmentException);
+    await expect(slotConfirmationService.confirmAppointment(appointmentTest)).rejects.toThrowError(
+      InvalidAppointmentException,
+    );
   });
 
   it('add appointment if not overlapping', async () => {
@@ -107,8 +105,8 @@ describe('Slot Confirmation Service', () => {
       }).getValue(),
     }).getValue();
 
-    await expect(
-      slotConfirmationService.confirmAppointment(appointmentTest),
-    ).rejects.toThrowError(InvalidAppointmentException);
+    await expect(slotConfirmationService.confirmAppointment(appointmentTest)).rejects.toThrowError(
+      InvalidAppointmentException,
+    );
   });
 });

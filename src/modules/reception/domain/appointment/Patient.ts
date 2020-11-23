@@ -18,7 +18,7 @@ class PatientProperties {
 
   @IsNotEmpty()
   @IsString()
-  mobileNumber: string;
+  mobilePhone: string;
 
   @IsOptional()
   @IsString()
@@ -48,8 +48,8 @@ export class Patient extends ValueObject<PatientProperties> {
     return this.properties.familyName;
   }
 
-  get mobileNumber(): string {
-    return this.properties.mobileNumber;
+  get mobilePhone(): string {
+    return this.properties.mobilePhone;
   }
 
   get fiscalId(): string {

@@ -13,18 +13,14 @@ export class InMemoryAppointmentRepository implements AppointmentRepository {
     return Promise.resolve(true);
   }
 
-  getAppointmentsInPeriod(
-    startPeriod: Date,
-    endPeriod: Date,
-  ): Promise<Appointment[]> {
+  getAppointmentsInPeriod(startPeriod: Date, endPeriod: Date): Promise<Appointment[]> {
     const results = [];
     this.appointments.forEach((appointment) => {
       const startTime = appointment.timeSchedule.startDate.getTime();
       const endTime = appointment.timeSchedule.endDate.getTime();
       if (
         (endTime >= startPeriod.getTime() && endTime <= endPeriod.getTime()) ||
-        (startTime >= startPeriod.getTime() &&
-          startTime <= endPeriod.getTime()) ||
+        (startTime >= startPeriod.getTime() && startTime <= endPeriod.getTime()) ||
         (startTime <= startPeriod.getTime() && endTime >= startPeriod.getTime())
       ) {
         results.push(appointment);

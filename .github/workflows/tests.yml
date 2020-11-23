@@ -4,7 +4,7 @@ on: push
 
 jobs:
   unit-tests:
-    name: HS API Unit tests
+    name: unit-tests
     runs-on: ubuntu-latest
 
     steps:

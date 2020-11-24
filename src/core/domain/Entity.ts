@@ -1,37 +1,35 @@
-import { UniqueEntityID } from "./UniqueEntityID";
+import { UniqueEntityID } from './UniqueEntityID';
 
 const isEntity = (v: any): v is Entity<any> => {
-    return v instanceof Entity;
-  };
-  
-  export abstract class Entity<T> {
-    protected readonly _id: UniqueEntityID;
-    public readonly properties: T;
-  
-    constructor (properties: T, id?: UniqueEntityID) {
-      this._id = id ? id : new UniqueEntityID();
-      this.properties = properties;
+  return v instanceof Entity;
+};
+
+export abstract class Entity<T> {
+  protected readonly _id: UniqueEntityID;
+  public readonly properties: T;
+
+  constructor(properties: T, id?: UniqueEntityID) {
+    this._id = id ? id : new UniqueEntityID();
+    this.properties = properties;
+  }
+
+  get uuid() {
+    return this._id.toValue();
+  }
+
+  public equals(object?: Entity<T>): boolean {
+    if (object == null || object == undefined) {
+      return false;
     }
 
-    get uuid() {
-      return this._id.toValue();
+    if (this === object) {
+      return true;
     }
-  
-    public equals (object?: Entity<T>) : boolean {
-  
-      if (object == null || object == undefined) {
-        return false;
-      }
-  
-      if (this === object) {
-        return true;
-      }
-  
-      if (!isEntity(object)) {
-        return false;
-      }
-  
-      return this._id.equals(object._id);
+
+    if (!isEntity(object)) {
+      return false;
     }
+
+    return this._id.equals(object._id);
   }
-  
+}

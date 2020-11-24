@@ -12,17 +12,17 @@ interface ValueObjectProperties {
 export abstract class ValueObject<T extends ValueObjectProperties> {
   public readonly properties: T;
 
-  constructor (properties: T) {
+  constructor(properties: T) {
     this.properties = Object.freeze(properties);
   }
 
-  public equals (vo?: ValueObject<T>) : boolean {
+  public equals(vo?: ValueObject<T>): boolean {
     if (vo === null || vo === undefined) {
       return false;
     }
     if (vo.properties === undefined) {
       return false;
     }
-    return shallowEqual(this.properties, vo.properties)
+    return shallowEqual(this.properties, vo.properties);
   }
 }

@@ -21,17 +21,13 @@ export class SlotConfirmationService {
     );
 
     if (appointments.length > 0) {
-      throw new InvalidAppointmentException(
-        'Appointment is overlapping with other appointments',
-      );
+      throw new InvalidAppointmentException('Appointment is overlapping with other appointments');
     }
   }
 
   private checkNotInThePast(appointment: Appointment) {
     if (Date.now() > appointment.timeSchedule.startDate.getTime()) {
-      throw new InvalidAppointmentException(
-        'Appointments cannot start in the past',
-      );
+      throw new InvalidAppointmentException('Appointments cannot start in the past');
     }
   }
 }

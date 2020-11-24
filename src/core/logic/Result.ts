@@ -21,7 +21,7 @@ export class Result<T> {
     this.errorMessages = this.errors ? Result.flattenValidationErrors(this.errors) : [];
     this._value = value;
 
-    // Object.freeze(this);
+    Object.freeze(this);
   }
 
   public getValue(): T {

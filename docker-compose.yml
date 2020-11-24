@@ -1,0 +1,16 @@
+version: '3.4'
+
+services:
+
+  mongo:
+    build:
+      context: ./
+      dockerfile: .docker/Dockerfile
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: main
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGODB_USER: user
+      MONGODB_PASSWORD: password
+      MONGO_INITDB_DATABASE: hscreen
+    ports: 
+      - 27017:27017

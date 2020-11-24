@@ -42,4 +42,13 @@ describe('Time Schedule', () => {
     expect(schedule.isSuccess).toBeTruthy();
     expect(schedule.getValue() instanceof TimeSchedule).toBeTruthy();
   });
+
+  it('should have a start and an end date', () => {
+    const properties: any = {};
+    const result = TimeSchedule.create(properties);
+
+    expect(result.isFailure).toBeTruthy();
+    expect(result.errorMessages).toContain('startDate should not be empty');
+    expect(result.errorMessages).toContain('endDate should not be empty');
+  });
 });

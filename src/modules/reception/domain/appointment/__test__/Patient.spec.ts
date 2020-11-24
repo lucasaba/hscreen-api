@@ -35,5 +35,7 @@ describe('Patient', () => {
     expect(patient.name).toEqual('John');
     expect(patient.familyName).toEqual('Doe');
     expect(patient.mobilePhone).toEqual('555-54322118');
+    expect(patient.phoneNumber).toBeUndefined();
+    expect(patient.fiscalId).toBeUndefined();
   });
 });
